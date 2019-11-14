@@ -1,0 +1,147 @@
+<!--
+In this file anjular_js is used to implement a basic calculator
+The AngularJS framework can be divided into three major parts −
+
+ng-app − This directive defines and links an AngularJS application to HTML.
+
+ng-model − This directive binds the values of AngularJS application data to HTML input controls.
+
+ng-bind − This directive binds the AngularJS application data to HTML tags.
+-->
+<html>
+   <head>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
+      </script>
+      <title>Calculator</title>
+       <style>
+           h1{
+               text-align: center;
+               background-color:darkgrey;
+               padding: 20px;
+               border-radius: 20px;
+           }   
+           .main{
+               padding-left: 50px;
+               
+           }
+          hr { 
+    display: block;
+    margin-before: 0.5em;
+    margin-after: 0.5em;
+    margin-start: auto;
+    margin-end: auto;
+    overflow: hidden;
+    border-style:double;
+    border-width: 1px;
+}
+           body{
+               background-color:aliceblue ;
+           }
+       </style>
+   </head>
+   
+   <body >
+      <h1>Calculator</h1>
+       <!--
+       ng-app − This directive defines and links an AngularJS application to HTML.
+       -->
+      <div ng-app = "mainApp" ng-controller = "CalcController" class="main">
+         <p>Enter first number <input type = "number" ng-model = "Number1"></p>
+          <p>Enter second number <input type = "number" ng-model = "Number2"></p>
+          <p>Result: {{result}}
+          </p>
+          <button ng-click = "add()">Add</button>
+         <button ng-click = "sub()">subtract</button>
+          <button ng-click = "mul()">Multiply</button>
+          <button ng-click = "div()">Divide</button>
+          <button ng-click = "Modulo()">Modulo</button>
+          &emsp;
+          <button ng-click = "reset()">Reset</button>
+     
+       <br><br><br>
+           <!--
+            A controller is a JavaScript object that contains attributes/properties, and functions. Each controller accepts $scope as a parameter, which refers to the application/module that the controller needs to handle.
+            -->
+       <div ng-controller = "singleoperand">
+         <p>Enter first number <input type = "number" ng-model = "Num"></p>
+           <p>Result: {{result1}}</p>
+           <button ng-click = "square()">x<sup>2</sup></button>
+           <button ng-click = "cube()">x<sup>3</sup></button>
+           &emsp;
+          <button ng-click = "reset()">Reset</button>
+           
+          
+       </div>
+           </div>
+        <br><br><br>
+       <hr>
+       <br>
+       <p>
+           Angular_js is a Javascript framework which is used mainly to create single page application project. This calculator application is built using angular js.
+       </p>
+      
+       <script>
+         var mainApp = angular.module("mainApp", []);
+         
+         
+         mainApp.service('CalcService', function() {
+            this.add = function(a,b) {
+               return a+b;
+            },
+            this.sub = function(a,b) {
+               return a-b;
+            },
+            this.mul = function(a,b) {
+               return a*b;
+            },
+            this.div = function(a,b) {
+               return a/b;
+            },
+            this.Modulo = function(a,b) {
+               return a%b;
+            }
+         });
+         mainApp.controller('CalcController', function($scope, CalcService) {
+             $scope.Number1=0;
+             $scope.Number2=0;
+            $scope.add = function() {
+               $scope.result = CalcService.add($scope.Number1,$scope.Number2);
+            },
+            $scope.sub = function() {
+               $scope.result = CalcService.sub($scope.Number1,$scope.Number2);
+            },
+            $scope.mul = function() {
+               $scope.result = CalcService.mul($scope.Number1,$scope.Number2);
+            },
+            $scope.div = function() {
+               $scope.result = CalcService.div($scope.Number1,$scope.Number2);
+            },
+            $scope.Modulo = function() {
+               $scope.result = CalcService.Modulo($scope.Number1,$scope.Number2);
+            },
+                $scope.reset = function() {
+               $scope.Number1=0;
+               $scope.Number2=0;
+                $scope.result =0;
+            }
+         });
+           mainApp.controller('singleoperand', function($scope) {
+               $scope.Num=0;
+              // $scope.result1 =0;
+                 $scope.square = function() {
+               $scope.result1 = $scope.Num*$scope.Num;
+            },
+                     $scope.cube = function() {
+               $scope.result1 = $scope.Num*$scope.Num*$scope.Num;
+            },
+                $scope.reset = function() {
+               $scope.Num=0;
+                $scope.result1 =0;
+            }
+           });
+      </script>
+      
+     
+      
+   </body>
+</html>
